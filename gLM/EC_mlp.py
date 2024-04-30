@@ -3,10 +3,10 @@
 # This source code is licensed under the Academic and Non-Commercial Research Use Software License 
 # found in the LICENSE file in the root directory of this source tree.
 
-# usage: python EC_mlp.py <save/split/train> <data_path> <plm/plmglm> 
-# step 1: python EC_mlp.py save inference/results/ plm or python EC_mlp.py save inference/results/ plmglm
-# step 2: python EC_mlp.py split EC_dat_mlp.plm.pkl plm or python EC_mlp.py split EC_dat_mlp.plmglm.pkl plmglm 
-# step 3: python EC_mlp.py train train_split.plm.pkl plm or python EC_mlp.py split train_split.plmglm.pkl plmglm 
+# usage: python EC_mlp.py <save/split/train> <data_path> <plm/plmglm> <path_to_EC_database.m8>
+# step 1: python EC_mlp.py save inference/results/ plm or python EC_mlp.py save inference/results/ plmglm <path_to_EC_database.m8>
+# step 2: python EC_mlp.py split EC_dat_mlp.plm.pkl plm or python EC_mlp.py split EC_dat_mlp.plmglm.pkl plmglm <path_to_EC_database.m8>
+# step 3: python EC_mlp.py train train_split.plm.pkl plm or python EC_mlp.py split train_split.plmglm.pkl plmglm <path_to_EC_database.m8>
 
 import numpy as np
 import pandas as pd
@@ -323,8 +323,9 @@ def train(data_path, type):
 
 data_path = sys.argv[2]
 type = sys.argv[3]
+EC_database_path = sys.argv[4]
 if sys.argv[1] == "save":
-    EC_path = "MGnify_EC.m8"
+    EC_path = EC_database_path
     PROT_TO_EC = read_EC_file(EC_path) 
     save_data(data_path, type)
 elif sys.argv[1] == "split":
